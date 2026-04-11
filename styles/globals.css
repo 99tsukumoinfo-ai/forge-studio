@@ -750,6 +750,89 @@ textarea {
   line-height: 1.75;
 }
 
+/* ── Text body（プロースセクション） ── */
+
+.text-body {
+  max-width: 680px;
+  display: grid;
+  gap: 16px;
+}
+
+.text-body p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.9;
+}
+
+/* ── Info items（箇条書き的な補足アイテム） ── */
+
+.info-items {
+  display: grid;
+  gap: 12px;
+  max-width: 680px;
+}
+
+.info-item {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  display: grid;
+  gap: 4px;
+}
+
+.info-item__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.info-item__body {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+/* ── Step list（番号付き流れ） ── */
+
+.step-list {
+  max-width: 680px;
+  border-top: 1px solid var(--color-border);
+}
+
+.step-list__item {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--color-border);
+  align-items: start;
+}
+
+.step-list__num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+  padding-top: 3px;
+}
+
+.step-list__title {
+  margin: 0 0 4px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.step-list__desc {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
 /* ── Section modifiers ── */
 
 .section--slim {
