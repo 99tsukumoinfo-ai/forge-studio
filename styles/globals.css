@@ -750,6 +750,75 @@ textarea {
   line-height: 1.75;
 }
 
+/* ── Section modifiers ── */
+
+.section--slim {
+  padding: 56px 0;
+  border-top: 1px solid var(--color-border);
+}
+
+/* ── Intro Links（はじめての方への導線） ── */
+
+.intro-links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.intro-link-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.intro-link-item__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.intro-link-item__body {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.85;
+  flex: 1;
+}
+
+.intro-link-item__link {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.intro-link-item__link:hover {
+  text-decoration: underline;
+}
+
+/* ── Services footer CTA ── */
+
+.services-footer-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 540px;
+}
+
+.services-footer-cta__lead {
+  margin: 0;
+  font-size: 0.97rem;
+  color: var(--color-text-muted);
+  line-height: 1.85;
+}
+
 /* ── Responsive ── */
 
 @media (max-width: 900px) {
@@ -790,5 +859,13 @@ textarea {
 
   .tool-grid {
     grid-template-columns: 1fr;
+  }
+
+  .intro-links {
+    grid-template-columns: 1fr;
+  }
+
+  .section--slim {
+    padding: 40px 0;
   }
 }
