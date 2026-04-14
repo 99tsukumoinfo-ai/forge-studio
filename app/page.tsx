@@ -75,7 +75,7 @@ export default async function HomePage() {
       <Section
         eyebrow="サービスから探す"
         title="課題のテーマで選ぶ"
-        description="売上や業務の改善余地に合わせて、対応内容を5つのテーマに分けています。"
+        description="Forge Studioは、LINE・kintone・WordPress・会計／労務ツールなど、すでに使っているツールを軸に、売上導線と業務の仕組みを整える会社です。どこから手をつけるかは、次の5つのテーマから選べます。"
       >
         <div className="service-grid">
           {services.map((service) => (
