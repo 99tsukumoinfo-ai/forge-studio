@@ -2,10 +2,14 @@
   --font-sans:
     'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
 
-  /* ── Primary: deep navy（旧 teal #18605e → deep navy へ） */
+  /* ── Primary: deep navy */
   --color-primary: #1f3d6e;
   --color-primary-hover: #172e55;
-  --color-primary-soft: #eaeff7;
+  --color-primary-soft: #e5f0fb;
+
+  /* ── CTA: medium blue（ボタン専用） */
+  --color-cta: #4278b5;
+  --color-cta-hover: #3569a0;
 
   /* ── Accent: muted amber */
   --color-accent: #b07028;
@@ -24,10 +28,10 @@
   --color-surface-muted: #f5f7fa;
   --color-surface-dark: #1a2b40;
 
-  /* ── Border radius（落ち着いた値） */
-  --radius-lg: 12px;
-  --radius-md: 8px;
-  --radius-sm: 6px;
+  /* ── Border radius */
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
 
   /* ── Layout */
   --container-width: 1120px;

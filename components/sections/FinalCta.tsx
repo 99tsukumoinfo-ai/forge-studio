@@ -6,9 +6,7 @@ export function FinalCta() {
     <section className="final-cta">
       <Container>
         <div className="final-cta__inner">
-          <h2 className="final-cta__title">
-            まず、現状を話してみてください。
-          </h2>
+          <h2 className="final-cta__title">まず、現状を話してみてください。</h2>
           <p className="final-cta__description">
             課題が整理できていなくても構いません。
             <br />

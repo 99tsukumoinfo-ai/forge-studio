@@ -1,7 +1,10 @@
 import { notFound } from 'next/navigation';
 
-import { EntryDetail } from '@/components/sections/EntryDetail';
+import { IndustryDetailLayout } from '@/components/sections/IndustryDetailLayout';
 import { contentSource } from '@/lib/content';
+import { INDUSTRY_DETAIL_CONFIGS } from '@/lib/content/industry-detail-config';
+import type { IndustryPageSlug } from '@/lib/content/taxonomy';
+import { INDUSTRY_PAGE_SLUGS } from '@/lib/content/taxonomy';
 import { createMetadata } from '@/lib/metadata/site';
 
 type IndustryDetailPageProps = {
@@ -11,11 +14,7 @@ type IndustryDetailPageProps = {
 };
 
 export async function generateStaticParams() {
-  const industries = await contentSource.getAllIndustryPages();
-
-  return industries.map((industry) => ({
-    slug: industry.slug,
-  }));
+  return INDUSTRY_PAGE_SLUGS.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: IndustryDetailPageProps) {
@@ -45,5 +44,34 @@ export default async function IndustryDetailPage({
     notFound();
   }
 
-  return <EntryDetail eyebrow="Industry Detail" entry={industry} />;
+  const slug = industry.slug as IndustryPageSlug;
+  const config = INDUSTRY_DETAIL_CONFIGS[slug];
+
+  const [allCases, allInsights] = await Promise.all([
+    contentSource.getAllCases(),
+    contentSource.getAllInsights(),
+  ]);
+
+  // 業種タグで厳密フィルタ（最大3件）
+  const industryCases = allCases
+    .filter((c) => c.industryTags.includes(slug))
+    .slice(0, 3);
+
+  // 業種タグ or smb-general でフィルタ（最大3件）
+  const industryInsights = allInsights
+    .filter(
+      (i) =>
+        i.industryTags.includes(slug) ||
+        i.industryTags.includes('smb-general'),
+    )
+    .slice(0, 3);
+
+  return (
+    <IndustryDetailLayout
+      industry={industry}
+      config={config}
+      cases={industryCases}
+      insights={industryInsights}
+    />
+  );
 }

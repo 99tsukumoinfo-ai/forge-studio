@@ -4,23 +4,43 @@ import { Section } from '@/components/ui/Section';
 import { createMetadata } from '@/lib/metadata/site';
 
 export const metadata = createMetadata({
-  title: 'Contact',
+  title: '問い合わせ',
   description:
-    'FormSubmit.co を使った暫定フォームの基盤です。後で独自 API に差し替えやすいよう、UI を分離しています。',
+    '課題が整理できていない段階でも、現状を聞きながら何から整えるべきかを一緒に確認できます。',
   pathname: '/contact',
 });
+
+const contactTopics = [
+  '予約・問い合わせ・通知の流れを整えたい',
+  '顧客管理や案件の進捗管理を回しやすくしたい',
+  '社内の申請・連絡・集計の手作業を減らしたい',
+  'バックオフィスやWebまわりをどこから見直すべきか相談したい',
+];
 
 export default function ContactPage() {
   return (
     <>
       <PageHero
-        eyebrow="Contact"
-        title="問い合わせ導線の仮実装"
-        description="Step 3 では FormSubmit.co を継続しつつ、後で差し替えやすいようフォーム UI をコンポーネント化しています。"
+        eyebrow="問い合わせ"
+        title="まず現状をお聞かせください"
+        description="経営判断、売上実務、社内運用、ツール活用など、どこから整えるべきかを一緒に確認します。課題がまだ言葉になっていない段階でも大丈夫です。"
       />
       <Section
-        title="フォーム基盤"
-        description="送信先は環境変数 `NEXT_PUBLIC_FORMSUBMIT_ENDPOINT` で差し替えられます。"
+        title="こんな相談から始められます"
+        description="テーマがはっきり決まっていなくても、現在の状況を聞きながら整理できます。"
+      >
+        <div className="info-items">
+          {contactTopics.map((item) => (
+            <div key={item} className="info-item">
+              <p className="info-item__body">{item}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section
+        title="問い合わせフォーム"
+        description="内容を確認のうえ、必要に応じて折り返しご連絡します。"
       >
         <div className="form-panel">
           <InquiryForm />

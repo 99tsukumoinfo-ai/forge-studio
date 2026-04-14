@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Forge Studio OG Placeholder</title>
+  <desc id="desc">Default placeholder image for Forge Studio pages.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1f2937" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" rx="36" />
+  <rect x="72" y="72" width="1056" height="486" rx="28" fill="none" stroke="#c69254" stroke-opacity="0.45" />
+  <text x="96" y="156" fill="#c69254" font-family="Noto Sans JP, sans-serif" font-size="28" letter-spacing="6">FORGE STUDIO</text>
+  <text x="96" y="274" fill="#f8fafc" font-family="Noto Sans JP, sans-serif" font-size="76" font-weight="700">Forge Studio</text>
+  <text x="96" y="350" fill="#dbe4ef" font-family="Noto Sans JP, sans-serif" font-size="34">経営判断から、売上、IT実装まで。</text>
+  <text x="96" y="404" fill="#dbe4ef" font-family="Noto Sans JP, sans-serif" font-size="34">実務を整え、現場で回る仕組みに。</text>
+</svg>

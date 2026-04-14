@@ -59,12 +59,11 @@ const TOOL_DESCRIPTIONS: Record<string, string> = {
 };
 
 export default async function HomePage() {
-  const [services, industries, tools, cases, insights] = await Promise.all([
+  const [services, industries, tools, cases] = await Promise.all([
     contentSource.getAllServicePages(),
     contentSource.getAllIndustryPages(),
     contentSource.getAllToolPages(),
     contentSource.getAllCases(),
-    contentSource.getAllInsights(),
   ]);
 
   return (
@@ -80,20 +79,18 @@ export default async function HomePage() {
       >
         <div className="service-grid">
           {services.map((service) => (
-            <article key={service.slug} className="service-card">
+            <Link
+              key={service.slug}
+              href={`/services/${service.slug}`}
+              className="service-card"
+            >
               <h3 className="service-card__title">
                 {SERVICE_CATEGORY_LABELS[service.serviceCategory]}
               </h3>
               <p className="service-card__description">
                 {SERVICE_DESCRIPTIONS[service.slug] ?? service.excerpt}
               </p>
-              <Link
-                href={`/services/${service.slug}`}
-                className="service-card__link"
-              >
-                詳しく見る →
-              </Link>
-            </article>
+            </Link>
           ))}
         </div>
       </Section>
@@ -137,9 +134,7 @@ export default async function HomePage() {
               href={`/tools/${tool.slug}`}
               className="tool-card"
             >
-              <span className="tool-card__name">
-                {getToolLabel(tool.slug)}
-              </span>
+              <span className="tool-card__name">{getToolLabel(tool.slug)}</span>
               <span className="tool-card__description">
                 {TOOL_DESCRIPTIONS[tool.slug] ?? tool.excerpt}
               </span>
@@ -159,19 +154,26 @@ export default async function HomePage() {
       >
         <div className="content-grid">
           {cases.slice(0, 3).map((entry) => (
-            <article key={entry.slug} className="content-card">
+            <Link
+              key={entry.slug}
+              href={`/cases/${entry.slug}`}
+              className="content-card"
+            >
               <p className="content-card__label">事例</p>
-              <h3 className="content-card__title">
-                <Link href={`/cases/${entry.slug}`}>{entry.title}</Link>
-              </h3>
+              <h3 className="content-card__title">{entry.title}</h3>
               <p className="content-card__description">{entry.excerpt}</p>
-            </article>
+            </Link>
           ))}
         </div>
         <div className="section-cta-row">
-          <CtaLink href="/contact" variant="primary">
-            相談してみる
-          </CtaLink>
+          <div className="action-row">
+            <CtaLink href="/contact" variant="primary">
+              相談してみる
+            </CtaLink>
+            <Link href="/cases" className="service-detail-cta__sub">
+              事例一覧を見る →
+            </Link>
+          </div>
         </div>
       </Section>
 
@@ -188,26 +190,7 @@ export default async function HomePage() {
         <FaqAccordion />
       </Section>
 
-      {/* 9. お役立ち記事 */}
-      <Section
-        eyebrow="お役立ち記事"
-        title="相談前に読まれやすい記事"
-        description="課題の整理や進め方の参考になる記事を選んでいます。"
-      >
-        <div className="content-grid">
-          {insights.slice(0, 3).map((entry) => (
-            <article key={entry.slug} className="content-card">
-              <p className="content-card__label">記事</p>
-              <h3 className="content-card__title">
-                <Link href={`/insights/${entry.slug}`}>{entry.title}</Link>
-              </h3>
-              <p className="content-card__description">{entry.excerpt}</p>
-            </article>
-          ))}
-        </div>
-      </Section>
-
-      {/* 10. 最終CTA — 主要CTA #3 */}
+      {/* 9. 最終CTA — 主要CTA #3 */}
       <FinalCta />
     </>
   );

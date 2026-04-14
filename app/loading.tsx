@@ -7,10 +7,10 @@ export default function LoadingPage() {
       <PageHero
         eyebrow="Loading"
         title="ページを読み込んでいます"
-        description="Step 3 の段階では、主要 route に対する loading UI も先に用意しています。"
+        description="内容を準備しています。数秒待っても表示されない場合は、再読み込みをお試しください。"
       />
       <Section>
-        <p className="status-note">Preparing route content...</p>
+        <p className="status-note">ページ内容を読み込んでいます。</p>
       </Section>
     </>
   );

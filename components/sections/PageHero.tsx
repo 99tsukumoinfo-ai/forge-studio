@@ -17,11 +17,13 @@ export function PageHero({
 }: PageHeroProps) {
   return (
     <section className="page-hero">
-      <Container className="page-hero__inner">
-        {eyebrow ? <p className="page-hero__eyebrow">{eyebrow}</p> : null}
-        <h1 className="page-hero__title">{title}</h1>
-        <p className="page-hero__description">{description}</p>
-        {actions ? <div className="page-hero__actions">{actions}</div> : null}
+      <Container>
+        <div className="page-hero__inner">
+          {eyebrow ? <p className="page-hero__eyebrow">{eyebrow}</p> : null}
+          <h1 className="page-hero__title">{title}</h1>
+          <p className="page-hero__description">{description}</p>
+          {actions ? <div className="page-hero__actions">{actions}</div> : null}
+        </div>
       </Container>
     </section>
   );

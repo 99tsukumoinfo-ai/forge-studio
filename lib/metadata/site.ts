@@ -16,6 +16,8 @@ export const siteConfig = {
   name: 'Forge Studio',
   description:
     '経営判断から売上、IT実装まで。実務を整え、現場で回る仕組みづくりを支援します。',
+  footerText:
+    '経営判断から売上実務、IT実装まで。現場で回る仕組みを整え、利益につながる取り組みを支援します。',
   baseUrl:
     process.env.NEXT_PUBLIC_SITE_URL ?? 'https://forge-studio-site.vercel.app',
   defaultOgImage: '/images/og-default.svg',
@@ -23,8 +25,18 @@ export const siteConfig = {
   navigation: [
     { href: '/services', label: 'サービス' },
     { href: '/industries', label: '業界別' },
-    { href: '/#tools', label: 'ツール別' },
-    { href: '/about', label: 'はじめての方へ' },
+    { href: '/tools', label: 'ツール別' },
+    { href: '/cases', label: '事例' },
+    { href: '/how-to-start', label: 'はじめての方へ' },
+    { href: '/contact', label: '問い合わせ' },
+  ],
+  footerNavigation: [
+    { href: '/services', label: 'サービス' },
+    { href: '/industries', label: '業界別' },
+    { href: '/tools', label: 'ツール別' },
+    { href: '/cases', label: '事例' },
+    { href: '/about', label: 'Forge Studio について' },
+    { href: '/how-to-start', label: 'はじめての方へ' },
     { href: '/contact', label: '問い合わせ' },
   ],
 } as const;
@@ -38,6 +50,7 @@ export function createMetadata(options?: {
   description?: string;
   pathname?: string;
   ogImage?: string;
+  noIndex?: boolean;
 }): Metadata {
   const title = options?.title
     ? `${options.title} | ${siteConfig.name}`
@@ -68,5 +81,11 @@ export function createMetadata(options?: {
       description,
       images: [ogImage],
     },
+    robots: options?.noIndex
+      ? {
+          index: false,
+          follow: true,
+        }
+      : undefined,
   };
 }

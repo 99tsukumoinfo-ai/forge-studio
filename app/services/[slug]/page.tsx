@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation';
 
-import { EntryDetail } from '@/components/sections/EntryDetail';
+import { ServiceDetailLayout } from '@/components/sections/ServiceDetailLayout';
 import { contentSource } from '@/lib/content';
+import { SERVICE_DETAIL_CONFIGS } from '@/lib/content/service-detail-config';
 import { createMetadata } from '@/lib/metadata/site';
 
 type ServiceDetailPageProps = {
@@ -45,5 +46,27 @@ export default async function ServiceDetailPage({
     notFound();
   }
 
-  return <EntryDetail eyebrow="Service Detail" entry={service} />;
+  const config = SERVICE_DETAIL_CONFIGS[service.serviceCategory];
+
+  const [allCases, allInsights] = await Promise.all([
+    contentSource.getAllCases(),
+    contentSource.getAllInsights(),
+  ]);
+
+  const serviceCases = allCases
+    .filter((c) => c.serviceCategory === service.serviceCategory)
+    .slice(0, 3);
+
+  const serviceInsights = allInsights
+    .filter((i) => i.serviceCategory === service.serviceCategory)
+    .slice(0, 3);
+
+  return (
+    <ServiceDetailLayout
+      service={service}
+      config={config}
+      cases={serviceCases}
+      insights={serviceInsights}
+    />
+  );
 }

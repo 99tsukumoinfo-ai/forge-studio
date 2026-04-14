@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: InsightDetailPageProps) {
     description: insight.description,
     pathname: `/insights/${insight.slug}`,
     ogImage: insight.ogImage,
+    noIndex: true,
   });
 }
 
@@ -45,5 +46,5 @@ export default async function InsightDetailPage({
     notFound();
   }
 
-  return <EntryDetail eyebrow="Insight Detail" entry={insight} />;
+  return <EntryDetail eyebrow="お役立ち記事" entry={insight} />;
 }

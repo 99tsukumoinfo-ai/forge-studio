@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 
-const faqs = [
+import type { FaqItem } from '@/lib/content/service-detail-config';
+
+const DEFAULT_FAQS: FaqItem[] = [
   {
     q: 'まだ課題が整理できていない段階でも相談できますか？',
     a: 'はい、問題ありません。どこから手をつければいいかわからない、という状態から一緒に整理することも多いです。まずは現状を話していただければ、優先度の高い課題を一緒に整理します。',
@@ -33,7 +35,11 @@ const faqs = [
   },
 ];
 
-export function FaqAccordion() {
+type Props = {
+  faqs?: FaqItem[];
+};
+
+export function FaqAccordion({ faqs = DEFAULT_FAQS }: Props) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (

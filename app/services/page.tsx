@@ -70,20 +70,18 @@ export default async function ServicesPage() {
       <Section>
         <div className="service-grid">
           {services.map((service) => (
-            <article key={service.slug} className="service-card">
+            <Link
+              key={service.slug}
+              href={`/services/${service.slug}`}
+              className="service-card"
+            >
               <h2 className="service-card__title">
                 {SERVICE_CATEGORY_LABELS[service.serviceCategory]}
               </h2>
               <p className="service-card__description">
                 {SERVICE_DESCRIPTIONS[service.slug] ?? service.excerpt}
               </p>
-              <Link
-                href={`/services/${service.slug}`}
-                className="service-card__link"
-              >
-                詳しく見る →
-              </Link>
-            </article>
+            </Link>
           ))}
         </div>
       </Section>

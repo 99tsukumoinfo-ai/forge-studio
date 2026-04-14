@@ -20,7 +20,7 @@ export default function NotFound() {
       />
       <Section>
         <p className="site-note">
-          Step 3 では not-found / error / loading の受け皿も先に配置しています。
+          お探しの内容に近いページとして、サービス一覧や事例一覧から見直していただくこともできます。
         </p>
       </Section>
     </>

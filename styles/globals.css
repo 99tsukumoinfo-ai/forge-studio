@@ -91,12 +91,226 @@ textarea {
 .site-footer__links a {
   font-size: 0.88rem;
   color: var(--color-text-muted);
-  transition: color 0.15s;
+  transition: color 0.2s;
+  position: relative;
 }
 
-.site-header__link:hover,
+.site-header__link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+
+.site-header__link:hover {
+  color: var(--color-primary);
+}
+
+.site-header__link:hover::after {
+  transform: scaleX(1);
+}
+
 .site-footer__links a:hover {
   color: var(--color-text);
+}
+
+.site-header__cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 22px;
+  border-radius: 10px;
+  background: var(--color-cta);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+
+.site-header__cta::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0s;
+  pointer-events: none;
+}
+
+.site-header__cta:hover {
+  background: var(--color-cta-hover);
+  color: #fff;
+}
+
+.site-header__cta:hover::after {
+  left: 140%;
+  transition: left 0.45s ease;
+}
+
+/* ── Mobile Nav ── */
+
+.mobile-nav {
+  position: relative;
+}
+
+.mobile-nav__toggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-nav__bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+}
+
+.mobile-nav__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+}
+
+/* fixed の子 absolute は viewport 基準で配置される */
+.mobile-nav__panel {
+  position: absolute;
+  top: 57px;
+  left: 0;
+  right: 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-nav__link {
+  padding: 16px 20px;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mobile-nav__link:last-child {
+  border-bottom: none;
+}
+
+/* ── Dropdown Nav ── */
+
+.nav-item {
+  position: relative;
+}
+
+.nav-item__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  transition: transform 0.2s ease;
+  margin-top: 1px;
+}
+
+.nav-item:hover .nav-caret {
+  transform: rotate(180deg);
+}
+
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 260px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 32px rgba(31, 61, 110, 0.12);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.18s ease;
+  transform: translateX(-50%) translateY(-6px);
+  z-index: 30;
+  pointer-events: none;
+}
+
+/* small arrow pointing up */
+.nav-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background: var(--color-surface);
+  border-left: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
+  rotate: 45deg;
+}
+
+.nav-item:hover .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.nav-dropdown__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-dropdown__item {
+  display: block;
+  padding: 10px 14px;
+  font-size: 0.83rem;
+  color: var(--color-text-muted);
+  border-radius: var(--radius-sm);
+  line-height: 1.5;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav-dropdown__item:hover {
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
 }
 
 /* ── Footer ── */
@@ -118,7 +332,8 @@ textarea {
 /* ── Page Hero（内部ページ用） ── */
 
 .page-hero {
-  padding: 72px 0 40px;
+  padding: 80px 0 56px;
+  background: var(--color-primary-soft);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -137,6 +352,23 @@ textarea {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.page-hero__eyebrow,
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.page-hero__eyebrow::before,
+.section-eyebrow::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--color-accent);
+  flex-shrink: 0;
 }
 
 .page-hero__title {
@@ -179,33 +411,59 @@ textarea {
   align-items: center;
   justify-content: center;
   min-height: 48px;
-  padding: 0 24px;
-  border-radius: var(--radius-md);
+  padding: 0 28px;
+  border-radius: 10px;
   border: 1px solid transparent;
   font-size: 0.95rem;
   font-weight: 700;
   text-decoration: none;
+  position: relative;
+  overflow: hidden;
   transition:
-    background 0.15s,
-    border-color 0.15s,
-    color 0.15s;
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+
+/* シマーエフェクト：斜め光がボタンを走る */
+.cta-link::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0s;
+  pointer-events: none;
+}
+
+.cta-link:hover::after {
+  left: 140%;
+  transition: left 0.45s ease;
 }
 
 .cta-link--primary {
-  background: var(--color-primary);
+  background: var(--color-cta);
   color: #fff;
-  border-color: var(--color-primary);
+  border-color: var(--color-cta);
 }
 
 .cta-link--primary:hover {
-  background: var(--color-primary-hover);
-  border-color: var(--color-primary-hover);
+  background: var(--color-cta-hover);
+  border-color: var(--color-cta-hover);
 }
 
 .cta-link--secondary {
   background: transparent;
-  color: var(--color-primary);
-  border-color: var(--color-primary);
+  color: var(--color-cta);
+  border-color: var(--color-cta);
 }
 
 .cta-link--secondary:hover {
@@ -219,7 +477,7 @@ textarea {
 }
 
 .section--muted {
-  background: var(--color-surface-muted);
+  background: var(--color-primary-soft);
 }
 
 .section-heading {
@@ -253,6 +511,38 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.content-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(66, 120, 181, 0.1),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0s;
+  pointer-events: none;
+}
+
+.content-card:hover {
+  border-color: var(--color-primary);
+}
+
+.content-card:hover::after {
+  left: 140%;
+  transition: left 0.5s ease;
 }
 
 .content-card__label {
@@ -264,14 +554,7 @@ textarea {
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.4;
-}
-
-.content-card__title a {
   color: var(--color-text);
-}
-
-.content-card__title a:hover {
-  color: var(--color-primary);
 }
 
 .content-card__description,
@@ -286,7 +569,7 @@ textarea {
 
 .home-hero {
   padding: 100px 0 88px;
-  background: var(--color-surface);
+  background: var(--color-primary-soft);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -344,11 +627,38 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  transition: border-color 0.15s;
+  transition: border-color 0.2s;
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(66, 120, 181, 0.1),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0s;
+  pointer-events: none;
 }
 
 .service-card:hover {
   border-color: var(--color-primary);
+}
+
+.service-card:hover::after {
+  left: 140%;
+  transition: left 0.5s ease;
 }
 
 .service-card__title {
@@ -365,19 +675,6 @@ textarea {
   color: var(--color-text-muted);
   line-height: 1.8;
   flex: 1;
-}
-
-.service-card__link {
-  display: inline-block;
-  margin-top: 4px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-.service-card__link:hover {
-  text-decoration: underline;
 }
 
 /* ── Industry Grid / Card ── */
@@ -398,11 +695,36 @@ textarea {
   padding: 20px;
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.15s;
+  transition: border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.industry-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(66, 120, 181, 0.1),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0s;
+  pointer-events: none;
 }
 
 .industry-card:hover {
   border-color: var(--color-primary);
+}
+
+.industry-card:hover::after {
+  left: 140%;
+  transition: left 0.5s ease;
 }
 
 .industry-card__name {
@@ -415,6 +737,88 @@ textarea {
   font-size: 0.84rem;
   color: var(--color-text-muted);
   line-height: 1.7;
+}
+
+/* ── Industry Index Grid / Card（/industries 一覧用） ── */
+
+.industry-index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.industry-index-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 28px 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s;
+}
+
+.industry-index-card:hover {
+  border-color: var(--color-primary);
+}
+
+.industry-index-card__name {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.industry-index-card__note {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  flex: 1;
+}
+
+.industry-index-card__link {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+/* ── Service Label List（/industries でのサービス導線） ── */
+
+.service-label-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 640px;
+}
+
+.service-label-item {
+  display: block;
+  padding: 12px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.service-label-item:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.service-label-item__more {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.service-label-item__more:hover {
+  text-decoration: underline;
 }
 
 /* ── Tool Grid / Card ── */
@@ -435,11 +839,36 @@ textarea {
   padding: 20px;
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.15s;
+  transition: border-color 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(66, 120, 181, 0.1),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0s;
+  pointer-events: none;
 }
 
 .tool-card:hover {
   border-color: var(--color-primary);
+}
+
+.tool-card:hover::after {
+  left: 140%;
+  transition: left 0.5s ease;
 }
 
 .tool-card__name {
@@ -452,6 +881,145 @@ textarea {
   font-size: 0.83rem;
   color: var(--color-text-muted);
   line-height: 1.7;
+}
+
+/* ── Case List Grid / Card（/cases 一覧用） ── */
+
+.case-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.case-list-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 28px 24px;
+  background: var(--color-surface);
+  transition: border-color 0.2s;
+  color: inherit;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.case-list-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(66, 120, 181, 0.1),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: left 0s;
+  pointer-events: none;
+}
+
+.case-list-card:hover {
+  border-color: var(--color-primary);
+}
+
+.case-list-card:hover::after {
+  left: 140%;
+  transition: left 0.5s ease;
+}
+
+.case-list-card__header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  align-items: baseline;
+}
+
+.case-list-card__industry {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  letter-spacing: 0.03em;
+}
+
+.case-list-card__service {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.case-list-card__title {
+  margin: 0;
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.45;
+}
+
+.case-list-card__excerpt {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  flex: 1;
+}
+
+.case-list-card__tools {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* ── Tool Index Grid / Card（/tools 一覧用） ── */
+
+.tool-index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.tool-index-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 28px 24px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s;
+}
+
+.tool-index-card:hover {
+  border-color: var(--color-primary);
+}
+
+.tool-index-card__name {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.tool-index-card__note {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  flex: 1;
+}
+
+.tool-index-card__link {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
 }
 
 /* ── Promise Section ── */
@@ -607,6 +1175,16 @@ textarea {
   border-color: var(--color-primary-soft);
 }
 
+/* 暗背景の白ボタン：シマーを navy 系に変える */
+.final-cta .cta-link--primary::after {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(31, 61, 110, 0.12),
+    transparent
+  );
+}
+
 /* ── Meta / Chip / Panel / Sidebar ── */
 
 .meta-list {
@@ -713,6 +1291,17 @@ textarea {
   gap: 8px;
 }
 
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.form-label--required::after {
+  content: ' *';
+  color: var(--color-accent);
+}
+
 .form-field label {
   font-size: 0.9rem;
   font-weight: 600;
@@ -720,7 +1309,8 @@ textarea {
 }
 
 .form-field input,
-.form-field textarea {
+.form-field textarea,
+.form-field select {
   width: 100%;
   border-radius: var(--radius-sm);
   border: 1px solid var(--color-border);
@@ -728,10 +1318,20 @@ textarea {
   background: #fff;
   color: var(--color-text);
   transition: border-color 0.15s;
+  appearance: none;
+}
+
+.form-field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
 }
 
 .form-field input:focus,
-.form-field textarea:focus {
+.form-field textarea:focus,
+.form-field select:focus {
   outline: none;
   border-color: var(--color-primary);
 }
@@ -886,6 +1486,103 @@ textarea {
   text-decoration: underline;
 }
 
+/* ── Issue Grid / Card（業界ページ課題一覧） ── */
+
+.issue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.issue-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 22px 20px;
+  display: grid;
+  gap: 8px;
+}
+
+.issue-card__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.4;
+}
+
+.issue-card__body {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+/* ── What We Do List（Forge Studioで対応できること） ── */
+
+.whatwedo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--color-border);
+  max-width: 680px;
+}
+
+.whatwedo-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.7;
+  padding-left: 20px;
+  position: relative;
+}
+
+.whatwedo-item::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 22px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+/* ── Service Detail CTA ── */
+
+.service-detail-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 540px;
+}
+
+.service-detail-cta__lead {
+  margin: 0;
+  font-size: 0.97rem;
+  color: var(--color-text-muted);
+  line-height: 1.85;
+}
+
+.service-detail-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+}
+
+.service-detail-cta__sub {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.service-detail-cta__sub:hover {
+  text-decoration: underline;
+}
+
 /* ── Services footer CTA ── */
 
 .services-footer-cta {
@@ -923,6 +1620,16 @@ textarea {
   }
 }
 
+@media (max-width: 768px) {
+  .site-header__nav {
+    display: none;
+  }
+
+  .mobile-nav__toggle {
+    display: flex;
+  }
+}
+
 @media (max-width: 640px) {
   :root {
     --section-py: 64px;
@@ -945,6 +1652,18 @@ textarea {
   }
 
   .intro-links {
+    grid-template-columns: 1fr;
+  }
+
+  .case-list-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-index-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .industry-index-grid {
     grid-template-columns: 1fr;
   }
 

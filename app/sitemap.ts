@@ -4,19 +4,22 @@ import { contentSource } from '@/lib/content';
 import { getSiteUrl } from '@/lib/metadata/site';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [services, industries, tools, cases, insights] = await Promise.all([
+  const [services, industries, tools, cases] = await Promise.all([
     contentSource.getAllServicePages(),
     contentSource.getAllIndustryPages(),
     contentSource.getAllToolPages(),
     contentSource.getAllCases(),
-    contentSource.getAllInsights(),
   ]);
 
   return [
     { url: getSiteUrl('/'), lastModified: new Date() },
     { url: getSiteUrl('/services'), lastModified: new Date() },
     { url: getSiteUrl('/industries'), lastModified: new Date() },
+    { url: getSiteUrl('/tools'), lastModified: new Date() },
+    { url: getSiteUrl('/cases'), lastModified: new Date() },
     { url: getSiteUrl('/about'), lastModified: new Date() },
+    { url: getSiteUrl('/how-to-start'), lastModified: new Date() },
+    { url: getSiteUrl('/pricing-and-scope'), lastModified: new Date() },
     { url: getSiteUrl('/contact'), lastModified: new Date() },
     ...services.map((entry) => ({
       url: getSiteUrl(`/services/${entry.slug}`),
@@ -32,10 +35,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
     ...cases.map((entry) => ({
       url: getSiteUrl(`/cases/${entry.slug}`),
-      lastModified: new Date(entry.updatedAt),
-    })),
-    ...insights.map((entry) => ({
-      url: getSiteUrl(`/insights/${entry.slug}`),
       lastModified: new Date(entry.updatedAt),
     })),
   ];

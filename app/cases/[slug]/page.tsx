@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 
-import { EntryDetail } from '@/components/sections/EntryDetail';
+import { CaseStudyDetailLayout } from '@/components/sections/CaseStudyDetailLayout';
 import { contentSource } from '@/lib/content';
 import { createMetadata } from '@/lib/metadata/site';
 
@@ -43,5 +43,5 @@ export default async function CaseDetailPage({ params }: CaseDetailPageProps) {
     notFound();
   }
 
-  return <EntryDetail eyebrow="Case Detail" entry={caseStudy} />;
+  return <CaseStudyDetailLayout caseStudy={caseStudy} />;
 }

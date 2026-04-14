@@ -6,7 +6,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { compileMDX } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';
-import { ZodSchema } from 'zod';
+import type { ZodSchema } from 'zod';
 
 import {
   caseStudySchema,
@@ -16,6 +16,7 @@ import {
   toolPageSchema,
 } from './schema';
 import {
+  type ContentStatus,
   PRIMARY_INDUSTRY_SLUGS,
   PRIMARY_SERVICE_SLUGS,
   PRIMARY_TOOL_SLUGS,
@@ -24,7 +25,6 @@ import type {
   CaseStudy,
   CollectionFrontmatterMap,
   ContentEntry,
-  ContentStatus,
   ContentSource,
   IndustryPage,
   Insight,
@@ -58,11 +58,16 @@ const COLLECTION_CONFIG = {
 } as const;
 
 type CollectionName = keyof typeof COLLECTION_CONFIG;
+type CollectionSchemaMap = {
+  [TCollection in CollectionName]: ZodSchema<CollectionFrontmatterMap[TCollection]>;
+};
 type ContentQueryOptions = {
   statuses?: readonly ContentStatus[];
 };
 
-const DEFAULT_PUBLIC_STATUSES = ['published'] as const satisfies readonly ContentStatus[];
+const DEFAULT_PUBLIC_STATUSES = [
+  'published',
+] as const satisfies readonly ContentStatus[];
 
 function createCollectionError(filePath: string, message: string) {
   return new Error(`Invalid frontmatter in ${filePath}: ${message}`);
@@ -87,8 +92,12 @@ async function parseEntry<TCollection extends CollectionName>(
 ): Promise<ContentEntry<TCollection>> {
   const rawSource = await fs.readFile(filePath, 'utf8');
   const parsed = matter(rawSource);
-  const schema = COLLECTION_CONFIG[collection]
-    .schema as ZodSchema<CollectionFrontmatterMap[TCollection]>;
+  const schema = (COLLECTION_CONFIG as {
+    [TKey in CollectionName]: {
+      directory: string;
+      schema: CollectionSchemaMap[TKey];
+    };
+  })[collection].schema;
   const frontmatter = schema.safeParse(parsed.data);
 
   if (!frontmatter.success) {

@@ -30,9 +30,9 @@ export function EntryDetail<TCollection extends ContentCollection>({
         description={entry.description}
         actions={
           <div className="action-row">
-            <CtaLink href="/contact">相談導線の器を確認する</CtaLink>
+            <CtaLink href="/contact">相談してみる</CtaLink>
             <CtaLink href="/services" variant="secondary">
-              サービス一覧へ
+              サービスを見る
             </CtaLink>
           </div>
         }
@@ -45,11 +45,11 @@ export function EntryDetail<TCollection extends ContentCollection>({
           </article>
           <aside className="detail-layout__sidebar">
             <div>
-              <p className="content-card__label">Service Category</p>
+              <p className="content-card__label">関連するサービス</p>
               <p>{SERVICE_CATEGORY_LABELS[entry.serviceCategory]}</p>
             </div>
             <div>
-              <p className="content-card__label">Industry Tags</p>
+              <p className="content-card__label">対象業界</p>
               <ul className="chip-list">
                 {entry.industryTags.map((tag) => (
                   <li key={tag}>{INDUSTRY_LABELS[tag]}</li>
@@ -57,7 +57,7 @@ export function EntryDetail<TCollection extends ContentCollection>({
               </ul>
             </div>
             <div>
-              <p className="content-card__label">Tool Tags</p>
+              <p className="content-card__label">使用ツール</p>
               <ul className="chip-list">
                 {entry.toolTags.map((tag) => (
                   <li key={tag}>{TOOL_LABELS[tag]}</li>
@@ -66,16 +66,12 @@ export function EntryDetail<TCollection extends ContentCollection>({
             </div>
             <dl className="meta-list">
               <div>
-                <dt className="content-card__label">Published</dt>
+                <dt className="content-card__label">公開日</dt>
                 <dd>{formatDate(entry.publishedAt)}</dd>
               </div>
               <div>
-                <dt className="content-card__label">Updated</dt>
+                <dt className="content-card__label">更新日</dt>
                 <dd>{formatDate(entry.updatedAt)}</dd>
-              </div>
-              <div>
-                <dt className="content-card__label">Status</dt>
-                <dd>{entry.status}</dd>
               </div>
             </dl>
           </aside>

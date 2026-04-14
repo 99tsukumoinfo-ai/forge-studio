@@ -21,7 +21,7 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
       <PageHero
         eyebrow="Error"
         title="ページ表示中にエラーが発生しました"
-        description="Step 3 では見た目は簡素に保ちつつ、App Router のエラーハンドリングを先に有効化しています。"
+        description="時間をおいて再読み込みすると解消する場合があります。うまく表示できない場合は、別ページからお試しください。"
       />
       <Section>
         <div className="action-row">
