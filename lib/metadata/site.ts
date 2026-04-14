@@ -21,7 +21,7 @@ export const siteConfig = {
   baseUrl:
     process.env.NEXT_PUBLIC_SITE_URL ?? 'https://forge-studio-site.vercel.app',
   defaultOgImage: '/images/og-default.svg',
-  formAction: getRequiredPublicEnv('NEXT_PUBLIC_FORMSUBMIT_ACTION'),
+  formAction: process.env.NEXT_PUBLIC_FORMSUBMIT_ACTION ?? '',
   navigation: [
     { href: '/services', label: 'サービス' },
     { href: '/industries', label: '業界別' },
