@@ -17,7 +17,7 @@ import { createMetadata } from '@/lib/metadata/site';
 
 export const metadata = createMetadata({
   description:
-    '経営判断から売上、IT実装まで。実務を整え、現場で回る仕組みづくりを支援します。',
+    '経営判断・売上実務・IT実装まで、中堅中小企業向けに一気通貫で取り組みます。LINE・kintone・WordPress・会計／労務ツールなど、すでに使っているツールを軸に、売上導線と業務の仕組みを整えます。',
   pathname: '/',
 });
 

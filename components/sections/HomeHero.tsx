@@ -11,16 +11,14 @@ export function HomeHero() {
               経営判断を、利益の流れに変える。
             </span>
             <span className="home-hero__title-sub">
-              経営判断を、動く実務に変える。
+              売上の入口から、IT実装、現場への浸透まで。
             </span>
             <span className="home-hero__title-sub">
-              マーケティングからIT実装まで、利益につながる順番で、動かす。
+              中堅中小企業の、実務を回す仕組みづくりを支援します。
             </span>
           </h1>
           <p className="home-hero__description">
-            経営判断から、売上、IT実装まで。
-            <br />
-            実務を整え、現場で回る仕組みに。
+            経営判断・売上実務・IT実装まで、中堅中小企業向けに、一気通貫で取り組みます。
           </p>
           <div className="home-hero__actions">
             <CtaLink href="/contact" variant="primary">
