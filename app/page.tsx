@@ -125,7 +125,7 @@ export default async function HomePage() {
         id="tools"
         eyebrow="ツールから探す"
         title="使っているツールから探す"
-        description="導入済みのツールがある場合は、そこを起点に整えることもできます。"
+        description="よく使われるツールを中心に掲載していますが、ここにないツールでも対応できる場合があります。まずは使っているツールを教えてください。"
       >
         <div className="tool-grid">
           {tools.map((tool) => (

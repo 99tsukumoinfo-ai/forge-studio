@@ -16,7 +16,7 @@ import { createMetadata } from '@/lib/metadata/site';
 export const metadata = createMetadata({
   title: 'ツール別に探す',
   description:
-    'すでに使っているツールがある場合は、そのツールを起点に改善しやすいテーマから探せます。ツールの設定だけでなく、導線・運用・記録・通知・数字の見え方まで含めて整理します。',
+    'LINE・kintone・WordPress・Googleツール・会計／労務ツールなど、よく使われるものを中心に掲載しています。ここにないツールでも対応できる場合があるので、まずは相談してください。',
   pathname: '/tools',
 });
 
