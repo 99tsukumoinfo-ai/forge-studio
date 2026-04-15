@@ -16,8 +16,9 @@ import {
 import { createMetadata } from '@/lib/metadata/site';
 
 export const metadata = createMetadata({
+  title: 'Forge Studio｜新規取引の取りこぼしを止める',
   description:
-    '経営判断・売上実務・IT実装まで、中堅中小企業向けに一気通貫で取り組みます。LINE・kintone・WordPress・会計／労務ツールなど、すでに使っているツールを軸に、売上導線と業務の仕組みを整えます。',
+    '問い合わせから相談・面談・契約までの導線と、新規客に伝わるサイトの入口を整える支援。BtoB専門サービス・受託・相談型・高単価サービス向け。',
   pathname: '/',
 });
 

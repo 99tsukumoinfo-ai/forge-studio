@@ -7,18 +7,16 @@ export function HomeHero() {
       <Container>
         <div className="home-hero__inner">
           <h1 className="home-hero__title">
-            <span className="home-hero__title-main">
-              経営判断を、利益の流れに変える。
-            </span>
-            <span className="home-hero__title-sub">
-              売上の入口から、IT実装、現場への浸透まで。
-            </span>
-            <span className="home-hero__title-sub">
-              中堅中小企業の、実務を回す仕組みづくりを支援します。
-            </span>
+            新規取引の、取りこぼしを止める。
           </h1>
-          <p className="home-hero__description">
-            経営判断・売上実務・IT実装まで、中堅中小企業向けに、一気通貫で取り組みます。
+          <p className="home-hero__subcopy">
+            新規客に何を頼める会社か伝わる入口をつくり、
+            <br />
+            入ってきた問い合わせを、相談・面談・契約まで届ける。
+            <br />
+            <span className="home-hero__subcopy-company">
+              Forge Studioは、新規取引の入口と途中の取りこぼしを改善する会社です。
+            </span>
           </p>
           <div className="home-hero__actions">
             <CtaLink href="/contact" variant="primary">
