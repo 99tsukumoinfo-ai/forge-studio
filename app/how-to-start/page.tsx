@@ -31,19 +31,29 @@ const prepareItems = [
 
 const flowSteps = [
   {
-    num: 'Step 1',
-    title: '現状の整理',
-    desc: '現状の業務の流れとツールの使い方を確認し、課題の優先順位を一緒に整理します。',
+    num: '01',
+    title: '相談を受け止める',
+    desc: 'まずはお話を聞かせてください。まとまっていなくて大丈夫です。「なんとなくうまくいっていない」くらいの粒度から始められます。',
   },
   {
-    num: 'Step 2',
-    title: '方針の確認',
-    desc: '何を先に整えるか、どこまで対応するか、費用感の目安も含めて方針を決めます。',
+    num: '02',
+    title: '課題を整理する',
+    desc: 'お聞きした話を、こちらで整理します。どこに本当の課題があるか、どこから着手すると効くかを、一緒に確認していきます。',
   },
   {
-    num: 'Step 3',
-    title: '実装と調整',
-    desc: '現場で回り続けられるよう、実装しながら運用に合わせた調整を行います。',
+    num: '03',
+    title: '作るものを決める',
+    desc: 'やることを、画面・文章・設定・運用ルールなど、形のあるものに落とします。誰が・いつ・何をするかまで決めるので、実行のイメージが持てます。',
+  },
+  {
+    num: '04',
+    title: 'たたき台をつくって調整する',
+    desc: 'ゼロから議論するのではなく、まず動くものをお出しします。見ながら違和感を拾って直していくので、決まっていくスピードが速くなります。',
+  },
+  {
+    num: '05',
+    title: '動かしながら、次を決める',
+    desc: '実際に回し始めると、新しい課題が見えてきます。優先順位をつけて次の一手を返すので、改善が止まりません。',
   },
 ];
 
@@ -91,13 +101,19 @@ export default function HowToStartPage() {
 
       {/* よくある進め方の流れ */}
       <Section
-        title="よくある進め方の流れ"
-        description="相談から実装まで、おおよそ以下のような流れで進めます。状況によって順番や内容は変わります。"
+        eyebrow="よくある進め方の流れ"
+        title="言葉になっていない悩みを、動かせる形に変えます"
       >
+        <p className="step-list__lead">
+          「なんとなくうまくいっていない」「どこかで止まっている気がする」——まだ言葉になっていない悩みを、動かせる形に翻訳していくのがForge Studioの仕事です。いつも、次の5ステップで進めています。
+        </p>
         <div className="step-list">
           {flowSteps.map((step) => (
             <div key={step.num} className="step-list__item">
-              <span className="step-list__num">{step.num}</span>
+              <div className="step-list__num">
+                <span className="step-list__num-label">STEP</span>
+                <span className="step-list__num-digit">{step.num}</span>
+              </div>
               <div>
                 <h3 className="step-list__title">{step.title}</h3>
                 <p className="step-list__desc">{step.desc}</p>
@@ -105,6 +121,9 @@ export default function HowToStartPage() {
             </div>
           ))}
         </div>
+        <p className="step-list__note">
+          ※まだ依頼内容が固まっていない段階のご相談でも大丈夫です。STEP 01からご一緒に整理します。
+        </p>
       </Section>
 
       {/* 末尾CTA */}
